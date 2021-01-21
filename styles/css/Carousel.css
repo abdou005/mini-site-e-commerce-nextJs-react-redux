@@ -1,0 +1,23 @@
+.carousel .slide {
+    min-width: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    background: #fff !important;
+}
+.carousel .thumb.selected, .carousel .thumb:hover {
+    border: 3px solid #fff !important;
+}
+.carousel.carousel-slider .control-arrow {
+    width: 15% !important;
+}
+
+.carousel .control-arrow, .carousel.carousel-slider .control-arrow {
+    background: gray !important;
+}
+.carousel .carousel-status {
+    visibility: hidden !important;
+}
+.carousel .thumbs {
+    display: none !important;
+}

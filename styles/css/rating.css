@@ -1,0 +1,13 @@
+.widget-svg {
+    width: 1rem !important ;
+    height: 1rem !important ;
+    transition: transform 0.2s ease-in-out 0s;
+  }
+  .star-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+  }
+  
