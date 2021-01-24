@@ -9,11 +9,11 @@ const TopNewItem = ({ topNewProduct }) => {
         (topNewProduct.price * topNewProduct.discountRate) / 100;
     return (
         <div className="single-wid-product" >
-            <Link href={`/products/${topNewProduct.id}`} >
+            <Link href="/products/[id]" as={`/products/${topNewProduct.id}`}>
                 <img src={productImgSrc} alt="" className="product-thumb" />
             </Link>
             <h2>
-                <Link href={`/products/${topNewProduct.id}`} >
+                <Link href="/products/[id]" as={`/products/${topNewProduct.id}`} >
                     {topNewProduct.name}
                 </Link>
             </h2>

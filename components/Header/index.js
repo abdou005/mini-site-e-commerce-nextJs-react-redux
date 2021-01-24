@@ -10,7 +10,7 @@ const Header = () => {
                 <div className="row">
                     <Logo />
                     <SearchProducts keyword="" />
-                    <MiniCart cartQty={0} cartTotal={0} />
+                    <MiniCart />
                 </div>
             </div>
         </div>

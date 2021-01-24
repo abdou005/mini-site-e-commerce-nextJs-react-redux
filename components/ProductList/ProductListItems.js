@@ -2,12 +2,12 @@ import React from 'react'
 import ProductListPagination from './ProductListPagination'
 import ProductListItem from './ProductListItem'
 
-const ProductListItems = (props) => {
+const ProductListItems = ({ productListItems, addProductToCart }) => {
 
   function renderProductListItems() {
     return (
-      props.productListItems.map((product, index) => {
-        return <ProductListItem product={product} key={index} />
+      productListItems.map((product, index) => {
+        return <ProductListItem product={product} key={index} addProductToCart={addProductToCart} />
       })
     );
   }
@@ -18,7 +18,7 @@ const ProductListItems = (props) => {
       <div className="zigzag-bottom" />
       <div className="container">
         <div className="row">
-          {props.productListItems && props.productListItems.length > 0 && renderProductListItems()}
+          {productListItems && productListItems.length > 0 && renderProductListItems()}
         </div>
 
         <ProductListPagination />

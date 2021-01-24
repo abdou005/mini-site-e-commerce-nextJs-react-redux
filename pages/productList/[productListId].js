@@ -2,23 +2,47 @@ import React from 'react'
 import ShopTile from '../../components/ProductList/ShopTitle'
 import ProductListItems from '../../components/ProductList/ProductListItems'
 import Error from "next/error"
-import axios from 'axios'
 import { fetchProductList } from '../../redux/actions/productAction'
+import { connect } from 'react-redux'
+import { updateCartData } from '../../redux/actions/cartAction'
 
-const ProductListDetails = ({ shopName = "", productListItems = [], statusCode }) => {
+
+const ProductListDetails = ({ shopName = "", productListItems = [], statusCode, cartPage, updateCartData }) => {
+    console.log(cartPage)
+    const addProductToCart = (e, productData) => {
+        e.preventDefault()
+        const { cartData, cartId } = cartPage
+        let discountPrice = productData.discountRate ? Math.round(productData.price - (productData.price * productData.discountRate * 0.01)) : '';
+        let cartTotalPrice = (cartData.hasOwnProperty("total")) ? cartData.total + productData.price : productData.price
+        let cartTax = (cartData.hasOwnProperty("tax")) ? cartData.hasOwnProperty("tax") : 0
+        let cartItems = (cartData.hasOwnProperty("items")) ? cartData.items : []
+        let updatedCart = {
+            id: cartId,
+            total: cartTotalPrice,
+            subTotal: (cartData.hasOwnProperty("subTotal")) ? cartData.subTotal + (discountPrice ? discountPrice : productData.price) : (discountPrice ? discountPrice : productData.price),
+            tax: Math.round(cartTax + productData.price * 0.02),
+            items: [...cartItems, {
+                id: productData.id,
+                name: productData.name,
+                imageName: productData.imageName,
+                price: productData.price,
+                qty: 1
+            }]
+        }
+        updateCartData(updatedCart)
+    }
     if (statusCode) {
         return <Error statusCode={statusCode} />
     }
     return (
         <>
             <ShopTile title={shopName} />
-            <ProductListItems productListItems={productListItems} />
+            <ProductListItems productListItems={productListItems} addProductToCart={addProductToCart} />
         </>
     )
 
 }
 
-export default ProductListDetails
 
 export async function getServerSideProps(context) {
     try {
@@ -40,3 +64,18 @@ export async function getServerSideProps(context) {
     }
 
 }
+const mapStateToProps = ({ cartPage }) => {
+    return {
+        cartPage,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateCartData: (cartInfos) => dispatch(updateCartData(cartInfos))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListDetails);
+
+

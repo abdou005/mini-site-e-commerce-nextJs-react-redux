@@ -14,15 +14,20 @@ export const getTopNewProducts = () => {
 
 export const getProductsByCategories = (catId) => {
     return Axios.get(`${process.env.BASE_URL_JSON_SERVER_API}products-lists/${catId}`)
-    /*return new Promise((resolve, reject) => {
-        Axios.get(baseUrl + "products-lists/" + idCategory)
-            .then((response) => {
-                resolve(response.data);
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });*/
 };
+
+export const addCart = () => {
+    return Axios.post(`${process.env.BASE_URL_JSON_SERVER_API}carts`)
+};
+
+export const getCartByID = (cartId) => {
+    return Axios.get(`${process.env.BASE_URL_JSON_SERVER_API}carts/${cartId}`)
+};
+
+
+export const updateCart = (cart) => {
+    return Axios.put(`${process.env.BASE_URL_JSON_SERVER_API}carts/${cart.id}`, cart)
+};
+
 
 
