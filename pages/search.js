@@ -1,12 +1,11 @@
 import React from 'react'
-import ShopTile from '../../components/ProductList/ShopTitle'
-import ProductListItems from '../../components/ProductList/ProductListItems'
+import ShopTile from '../components/ProductList/ShopTitle'
+import ProductListItems from '../components/ProductList/ProductListItems'
 import Error from "next/error"
-import { fetchProductList } from '../../redux/actions/productAction'
+import { searchProduct } from '../redux/actions/productAction'
 
 
-const ProductListDetails = ({ shopName = "", productListItems = [], statusCode }) => {
-
+const SearchProduct = ({ shopName = "", productListItems = [], statusCode }) => {
     if (statusCode) {
         return <Error statusCode={statusCode} />
     }
@@ -22,12 +21,16 @@ const ProductListDetails = ({ shopName = "", productListItems = [], statusCode }
 
 export async function getServerSideProps(context) {
     try {
-        const productListId = context.query.productListId
-        const data = await fetchProductList(productListId)
+        console.log("query=>", context.query)
+        const keyword = context.query.q
+        console.log("key=>", keyword)
+
+        const data = await searchProduct(keyword)
+        console.log('data=>', data)
         return {
             props: {
-                shopName: data.name,
-                productListItems: data.items
+                shopName: keyword,
+                productListItems: data
             },
         }
     } catch (error) {
@@ -42,6 +45,6 @@ export async function getServerSideProps(context) {
 }
 
 
-export default ProductListDetails;
+export default SearchProduct;
 
 

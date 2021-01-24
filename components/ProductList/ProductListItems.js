@@ -2,12 +2,12 @@ import React from 'react'
 import ProductListPagination from './ProductListPagination'
 import ProductListItem from './ProductListItem'
 
-const ProductListItems = ({ productListItems, addProductToCart }) => {
+const ProductListItems = ({ productListItems }) => {
 
   function renderProductListItems() {
     return (
       productListItems.map((product, index) => {
-        return <ProductListItem product={product} key={index} addProductToCart={addProductToCart} />
+        return <ProductListItem product={product} key={index} />
       })
     );
   }

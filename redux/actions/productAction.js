@@ -1,7 +1,8 @@
 import {
   getTopNewProducts,
   getTopSellersProducts,
-  getProductsByCategories
+  getProductsByCategories,
+  searchProducts
 } from "../../services/api";
 import * as ActionType from "./actionTypes";
 // todo import action type like cartAction
@@ -23,5 +24,10 @@ export const topNewProducts = () => async (dispatch) => {
 
 export const fetchProductList = async (catId) => {
   const response = await getProductsByCategories(catId)
+  return response.data
+}
+
+export const searchProduct = async (query) => {
+  const response = await searchProducts(query)
   return response.data
 }

@@ -27,7 +27,6 @@ const CartItems = (props) => {
       {props.cartData && props.cartData.items && props.cartData.items.length > 0 && renderCartItems()}
       <tr>
         <td className="actions" colSpan={6}>
-
           {/* <Link href="/checkout"><button value="Checkout" name="proceed" className="checkout-button button alt wc-forward" > </button></Link> */}
         </td>
       </tr>

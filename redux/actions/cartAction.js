@@ -35,25 +35,6 @@ export const updateCartData = (cart) => async (dispatch) => {
     });
 }
 
-/*
-export const getCartData = (id) => {
-    return (dispatch) => {
-        getCartByID(id)
-            .then((result) => {
-                dispatch({
-                    type: CART_DATA_FETCHED,
-                    cartTotal: (result.hasOwnProperty('items')) ? getTotal(result.items) : 0,
-                    cartQty: (result.hasOwnProperty('items')) ? getTotalQuantity(result.items) : 0,
-                    cartData: result
-                });
-            })
-            .catch((error) => {
-                //to do here catch errr with sentry for exemple
-            });
-    };
-
-};
-*/
 const getTotal = (products) => {
     let total = 0;
     products.forEach((item) => {
