@@ -2,22 +2,25 @@ import {
   getTopNewProducts,
   getTopSellersProducts,
   getProductsByCategories,
-  searchProducts
+  searchProducts,
+  getProductByID
 } from "../../services/api";
-import * as ActionType from "./actionTypes";
+import { TOP_SELLERS_PRODUCTS_LIST_FETCHED, TOP_NEW_PRODUCTS_LIST_FETCHED, } from "./actionTypes";
+
 // todo import action type like cartAction
 export const topSellersProducts = () => async (dispatch) => {
   const response = await getTopSellersProducts()
-  return dispatch({
-    type: ActionType.TOP_SELLERS_PRODUCTS_LIST_FETCHED,
+  dispatch({
+    type: TOP_SELLERS_PRODUCTS_LIST_FETCHED,
     topSellersProducts: response.data,
   });
+  return response.data
 }
 
 export const topNewProducts = () => async (dispatch) => {
   const response = await getTopNewProducts()
   return dispatch({
-    type: ActionType.TOP_NEW_PRODUCTS_LIST_FETCHED,
+    type: TOP_NEW_PRODUCTS_LIST_FETCHED,
     topNewProducts: response.data,
   });
 }
@@ -29,5 +32,11 @@ export const fetchProductList = async (catId) => {
 
 export const searchProduct = async (query) => {
   const response = await searchProducts(query)
+  return response.data
+}
+
+
+export const fetchProductData = async (id) => {
+  const response = await getProductByID(id)
   return response.data
 }

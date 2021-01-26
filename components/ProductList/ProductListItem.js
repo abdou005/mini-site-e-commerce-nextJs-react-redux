@@ -31,7 +31,7 @@ const ProductListItem = ({ product, cartPage, updateCartData }) => {
   let productCategory = getProductImage(product)
   const productImgSrc = `/img/produts-img/${productCategory}/${product.imageName}`
 
-  const promoPrice = product.price -
+  const promoPrice = product.price +
     (product.price * product.discountRate) / 100;
 
   return (<div className="col-md-3 col-sm-6">
@@ -45,7 +45,7 @@ const ProductListItem = ({ product, cartPage, updateCartData }) => {
         </Link>
       </h2>
       <div className="product-carousel-price">
-        <ins>{formatPrice(promoPrice)}</ins> <del>{formatPrice(product.price)}</del>
+        <ins>{formatPrice(product.price)}</ins> <del>{formatPrice(promoPrice)}</del>
       </div>
       <div className="product-option-shop">
         {/* {<Link href="/cart">} */}

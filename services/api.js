@@ -34,4 +34,6 @@ export const searchProducts = (query) => {
 };
 
 
-
+export const getProductByID = (productId) => {
+    return Axios.get(`${process.env.BASE_URL_JSON_SERVER_API}products/${productId}`)
+};

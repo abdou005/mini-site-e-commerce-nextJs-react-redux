@@ -2,9 +2,15 @@ import React from 'react'
 import { formatPrice } from '../../services/utils'
 import Link from 'next/link'
 import { connect } from 'react-redux'
+import { useEffect } from 'react';
+import { prepareCart } from '../../redux/actions/cartAction'
 
-const MiniCart = ({ cartPage }) => {
-  const { cartTotal, cartQty } = cartPage
+
+
+const MiniCart = ({ cartTotal, cartQty, prepareCart }) => {
+  useEffect(() => {
+    prepareCart()
+  }, [])
   return (
     <div className="col-sm-4">
       <div className="shopping-item">
@@ -17,4 +23,14 @@ const MiniCart = ({ cartPage }) => {
     </div>
   )
 }
-export default connect((state) => state)(MiniCart)
+
+const mapStateToProps = ({ cartPage }) => {
+  return cartPage;
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    prepareCart: () => dispatch(prepareCart()),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
+//export default connect((state) => state)(MiniCart)

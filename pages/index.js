@@ -6,14 +6,10 @@ import Brands from '../components/Home/Brands'
 import ProductWidgetArea from '../components/Home/ProductWidgetArea'
 import { topSellersProducts, topNewProducts } from '../redux/actions/productAction'
 import { allCategories } from '../redux/actions/menuAction'
-import { useEffect } from 'react';
-import { prepareCart } from '../redux/actions/cartAction'
 
 
-const Home = ({ prepareCart, topSellersListProducts, topNewListProducts }) => {
-  useEffect(() => {
-    prepareCart()
-  }, [])
+const Home = ({ topSellersListProducts, topNewListProducts }) => {
+
 
 
   return (
@@ -29,23 +25,23 @@ const Home = ({ prepareCart, topSellersListProducts, topNewListProducts }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   async ({ store }) => {
     await store.dispatch(allCategories())
-    await store.dispatch(topSellersProducts())
+    const topSellersListProducts = await store.dispatch(topSellersProducts())
     await store.dispatch(topNewProducts())
+
+    return {
+      props: {
+        topSellersListProducts,
+      },
+    }
   }
 )
 
 const mapStateToProps = ({ homePage }) => {
   return {
-    topSellersListProducts: homePage.topSellersProducts,
     topNewListProducts: homePage.topNewProducts
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    prepareCart: () => dispatch(prepareCart()),
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);
 
 

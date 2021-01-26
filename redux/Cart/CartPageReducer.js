@@ -22,34 +22,6 @@ const CartPageReducer = (state = initialState, action) => {
                 cartQty: action.cartQty,
                 cartTotal: action.cartTotal
             };
-        case CART_DATA_UPDATED:
-            return {
-                ...state,
-                cartData: action.cartData,
-                cartQty: action.cartQty,
-                cartTotal: action.cartTotal
-
-
-            };
-        case CART_DATA_UPDATED:
-            return {
-                ...state,
-                cartData: action.cartData,
-                cartQty: action.cartQty,
-                cartTotal: action.cartTotal
-
-
-            };
-        case ORDER_CREATE:
-            return {
-                ...state,
-                cartId: '',
-                cartData: action.cartData,
-                cartQty: action.cartQty,
-                cartTotal: action.cartTotal,
-                order: action.order
-            };
-
         default:
             return state;
     }

@@ -14,7 +14,7 @@ const TopSellers = ({ topSellersListProducts }) => {
     <div className="col-md-4">
       <div className="single-product-widget">
         <h2 className="product-wid-title">Top Sellers</h2>
-        {/* <a href className="wid-view-more">View All</a> */}
+        <a href="" className="wid-view-more">View All</a>
         {topSellersListProducts && topSellersListProducts.length > 0 &&
           renderTopSellersItems()
         }

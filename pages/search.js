@@ -21,12 +21,8 @@ const SearchProduct = ({ shopName = "", productListItems = [], statusCode }) => 
 
 export async function getServerSideProps(context) {
     try {
-        console.log("query=>", context.query)
         const keyword = context.query.q
-        console.log("key=>", keyword)
-
         const data = await searchProduct(keyword)
-        console.log('data=>', data)
         return {
             props: {
                 shopName: keyword,

@@ -8,6 +8,7 @@ import { updateCartData } from '../redux/actions/cartAction'
 const Cart = ({ cartPage, updateCartData }) => {
     const { cartData, cartId, cartQty, cartTotal } = cartPage
     const updateCartInfos = (productData, context) => {
+        console.log('qte =>', productData.qty)
         let cartTax = (cartData.hasOwnProperty("tax")) ? cartData.hasOwnProperty("tax") : 0
         let cartItems = (cartData.hasOwnProperty("items")) ? cartData.items : []
         let foundIndex = cartItems.findIndex(x => x.id == productData.id);
