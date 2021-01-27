@@ -36,7 +36,7 @@ const CartItem = ({ product, updateCartInfos }) => {
     <td className="product-quantity">
       <div className="quantity buttons_added">
         <input type="button" className="minus" defaultValue="-" onClick={() => updateCartInfos(product, 'remove')} />
-        <input type="number" size={4} className="input-text qty text" title="Qty" defaultValue={product.qty} />
+        <input type="number" size={4} className="input-text qty text" title="Qty" value={product.qty} />
         <input type="button" className="plus" defaultValue="+" onClick={() => updateCartInfos(product, 'add')} />
       </div>
     </td>
