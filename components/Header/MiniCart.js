@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { formatPrice } from '../../services/utils'
 import Link from 'next/link'
 import { connect } from 'react-redux'
-import { useEffect } from 'react';
 import { prepareCart } from '../../redux/actions/cartAction'
 
 
@@ -33,4 +32,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
-//export default connect((state) => state)(MiniCart)

@@ -1,45 +1,56 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ShopTile from '../components/ProductList/ShopTitle'
+import { wrapper } from '../redux/store'
 import ProductListItems from '../components/ProductList/ProductListItems'
-import Error from "next/error"
+import { useRouter } from 'next/router'
 import { searchProduct } from '../redux/actions/productAction'
+import { allCategories } from '../redux/actions/menuAction'
+
+const SearchProduct = () => {
+    const router = useRouter()
+    const keyword = router.query.q
+    const [productListItems, setProductListItems] = useState([]);
+    const fetchListItems = async (mounted) => {
+        const result = await searchProduct(keyword)
+        if (mounted) {
+            setProductListItems(result)
+        }
+    };
+    useEffect(
+        () => {
+            let mounted = true
+            fetchListItems(mounted)
+            mounted = false
+        },
+        [keyword]
+    );
 
 
-const SearchProduct = ({ shopName = "", productListItems = [], statusCode }) => {
-    if (statusCode) {
-        return <Error statusCode={statusCode} />
-    }
     return (
         <>
-            <ShopTile title={shopName} />
-            <ProductListItems productListItems={productListItems} />
+            <ShopTile title={keyword} />
+            {productListItems.length > 0 ?
+                <ProductListItems productListItems={productListItems} /> :
+                <div style={{ textAlign: 'center' }}>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <p>----------------------------------Loading data---------------------------------</p>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <p>----------------------------------------------------------------------------------</p>
+                    <p>----------------------------------------------------------------------------------</p>
+                </div>
+            }
         </>
     )
 
 }
 
-
-export async function getServerSideProps(context) {
-    try {
-        const keyword = context.query.q
-        const data = await searchProduct(keyword)
-        return {
-            props: {
-                shopName: keyword,
-                productListItems: data
-            },
-        }
-    } catch (error) {
-        console.log(error)
-        return {
-            props: {
-                statusCode: error.response ? error.response.status : 500
-            }
-        }
+export const getServerSideProps = wrapper.getServerSideProps(
+    async ({ store }) => {
+        await store.dispatch(allCategories())
     }
-
-}
-
+)
 
 export default SearchProduct;
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'next/link'
 import { useRouter } from 'next/router'
 import { formatPrice, getProductImage } from '../../services/utils'
 
@@ -36,9 +35,9 @@ const CartItem = ({ product, updateCartInfos }) => {
     </td>
     <td className="product-quantity">
       <div className="quantity buttons_added">
-        <button type="button" className="minus" onClick={() => updateCartInfos(product, 'remove')} >-</button>
-        <input type="number" size={4} className="input-text qty text" title="Qty" value={product.qty} />
-        <button type="button" className="plus" onClick={() => updateCartInfos(product, 'add')} >+</button>
+        <input type="button" className="minus" defaultValue="-" onClick={() => updateCartInfos(product, 'remove')} />
+        <input type="number" size={4} className="input-text qty text" title="Qty" defaultValue={product.qty} />
+        <input type="button" className="plus" defaultValue="+" onClick={() => updateCartInfos(product, 'add')} />
       </div>
     </td>
     <td className="product-subtotal">

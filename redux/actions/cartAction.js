@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 import { CART_ID_FETCHED, CART_DATA_FETCHED } from "./actionTypes";
 
 export const prepareCart = () => async (dispatch) => {
-    console.log('preparecarte')
     let cartId = Cookies.get("cartId")
     if (typeof (cartId) === "undefined") {
         const response = await addCart()
